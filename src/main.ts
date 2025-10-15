@@ -234,6 +234,31 @@ function updateModeButtons(): void {
 }
 
 /**
+ * 切换标签页
+ */
+function switchTab(tabName: string): void {
+  // 更新标签按钮状态
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns.forEach(btn => {
+    if (btn.getAttribute('data-tab') === tabName) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  // 更新标签面板显示
+  const tabPanels = document.querySelectorAll('.tab-panel');
+  tabPanels.forEach(panel => {
+    if (panel.getAttribute('data-panel') === tabName) {
+      panel.classList.add('active');
+    } else {
+      panel.classList.remove('active');
+    }
+  });
+}
+
+/**
  * 保存统计数据
  */
 async function saveStatistics(): Promise<void> {
@@ -266,15 +291,18 @@ async function updateStatisticsDisplay(): Promise<void> {
     const statsEl = document.getElementById('statistics');
     if (statsEl) {
       statsEl.innerHTML = `
-        <div class="stat-item">
+        <div class="stat-card">
+          <span class="stat-icon">✅</span>
           <span class="stat-label">今日完成</span>
           <span class="stat-value">${todayStats.count} 个</span>
         </div>
-        <div class="stat-item">
+        <div class="stat-card">
+          <span class="stat-icon">⏰</span>
           <span class="stat-label">今日工作</span>
           <span class="stat-value">${todayStats.workTime} 分钟</span>
         </div>
-        <div class="stat-item">
+        <div class="stat-card">
+          <span class="stat-icon">🔥</span>
           <span class="stat-label">本次会话</span>
           <span class="stat-value">${sessionPomodoros} 个</span>
         </div>
@@ -314,6 +342,17 @@ function setupCustomTimer(): void {
 async function initApp(): Promise<void> {
   console.log('番茄钟应用初始化...');
 
+  // 绑定 Tab 切换事件
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabName = btn.getAttribute('data-tab');
+      if (tabName) {
+        switchTab(tabName);
+      }
+    });
+  });
+
   // 绑定按钮事件
   const startBtn = document.getElementById('startBtn');
   const pauseBtn = document.getElementById('pauseBtn');
@@ -329,10 +368,22 @@ async function initApp(): Promise<void> {
   const longBreakBtn = document.getElementById('longBreakBtn');
   const customBtn = document.getElementById('customBtn');
 
-  if (pomodoroBtn) pomodoroBtn.addEventListener('click', () => setMode('pomodoro'));
-  if (shortBreakBtn) shortBreakBtn.addEventListener('click', () => setMode('shortBreak'));
-  if (longBreakBtn) longBreakBtn.addEventListener('click', () => setMode('longBreak'));
-  if (customBtn) customBtn.addEventListener('click', setupCustomTimer);
+  if (pomodoroBtn) pomodoroBtn.addEventListener('click', () => {
+    setMode('pomodoro');
+    switchTab('timer');
+  });
+  if (shortBreakBtn) shortBreakBtn.addEventListener('click', () => {
+    setMode('shortBreak');
+    switchTab('timer');
+  });
+  if (longBreakBtn) longBreakBtn.addEventListener('click', () => {
+    setMode('longBreak');
+    switchTab('timer');
+  });
+  if (customBtn) customBtn.addEventListener('click', () => {
+    setupCustomTimer();
+    switchTab('timer');
+  });
 
   // 初始化显示
   updateDisplay();

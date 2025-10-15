@@ -2,7 +2,7 @@
   "$schema": "./schema.json",
   "id": "pomodoro-timer",
   "name": "番茄钟计时器",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Naimo Tools",
   "icon": "./ico.png",
   "description": "专注工作，提升效率的番茄钟与倒计时工具",

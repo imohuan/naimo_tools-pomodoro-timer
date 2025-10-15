@@ -8,21 +8,38 @@
 </head>
 
 <body class="w-full h-screen select-none overflow-hidden">
-  <div id="app" class="w-full h-full bg-gradient-to-br from-orange-50 to-red-50">
-    <div class="container">
-      <!-- 头部 -->
-      <div class="header">
-        <h1 class="title">🍅 番茄钟计时器</h1>
-        <p class="subtitle">专注工作，提升效率</p>
-      </div>
+  <div id="app" class="w-full h-full bg-gradient-to-br from-orange-50 to-red-50 flex flex-col">
+    <!-- 顶部标题栏 -->
+    <div class="header">
+      <h1 class="title">🍅 番茄钟</h1>
+    </div>
 
-      <!-- 主计时器区域 -->
-      <div class="timer-section">
-        <div class="mode-title" id="modeTitle">🍅 专注工作</div>
-        <div class="time-display" id="timeDisplay">25:00</div>
+    <!-- Tab 导航 -->
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="timer">
+        <span class="tab-icon">⏱️</span>
+        <span>计时器</span>
+      </button>
+      <button class="tab-btn" data-tab="stats">
+        <span class="tab-icon">📊</span>
+        <span>统计</span>
+      </button>
+      <button class="tab-btn" data-tab="modes">
+        <span class="tab-icon">🎯</span>
+        <span>模式</span>
+      </button>
+    </div>
 
-        <!-- 控制按钮 -->
-        <div class="controls">
+    <!-- Tab 内容区域 -->
+    <div class="tab-content-wrapper">
+      <!-- 计时器标签页 -->
+      <div class="tab-panel active" data-panel="timer">
+        <div class="timer-display-area">
+          <div class="mode-title" id="modeTitle">🍅 专注工作</div>
+          <div class="time-display" id="timeDisplay">25:00</div>
+        </div>
+
+        <div class="timer-controls">
           <button id="startBtn" class="btn btn-primary">
             <span class="btn-icon">▶️</span>
             <span>开始</span>
@@ -31,63 +48,65 @@
             <span class="btn-icon">⏸️</span>
             <span>暂停</span>
           </button>
-          <button id="resetBtn" class="btn btn-secondary">
+          <button id="resetBtn" class="btn btn-outline">
             <span class="btn-icon">🔄</span>
             <span>重置</span>
           </button>
         </div>
       </div>
 
-      <!-- 模式切换 -->
-      <div class="modes">
-        <button id="pomodoroBtn" class="mode-btn active">
-          <span class="mode-icon">🍅</span>
-          <span class="mode-text">番茄钟</span>
-          <span class="mode-time">25分钟</span>
-        </button>
-        <button id="shortBreakBtn" class="mode-btn">
-          <span class="mode-icon">☕</span>
-          <span class="mode-text">短休息</span>
-          <span class="mode-time">5分钟</span>
-        </button>
-        <button id="longBreakBtn" class="mode-btn">
-          <span class="mode-icon">🌟</span>
-          <span class="mode-text">长休息</span>
-          <span class="mode-time">15分钟</span>
-        </button>
-      </div>
-
-      <!-- 自定义时间 -->
-      <div class="custom-timer">
-        <div class="custom-label">⏱️ 自定义倒计时</div>
-        <div class="custom-input-group">
-          <input type="number" id="customMinutes" class="custom-input" placeholder="输入分钟数" min="1" max="120" />
-          <button id="customBtn" class="btn btn-outline">设置</button>
-        </div>
-      </div>
-
-      <!-- 统计信息 -->
-      <div class="statistics-section">
-        <div class="section-title">📊 今日统计</div>
-        <div id="statistics" class="statistics">
-          <div class="stat-item">
+      <!-- 统计标签页 -->
+      <div class="tab-panel" data-panel="stats">
+        <div class="stats-grid" id="statistics">
+          <div class="stat-card">
+            <span class="stat-icon">✅</span>
             <span class="stat-label">今日完成</span>
             <span class="stat-value">0 个</span>
           </div>
-          <div class="stat-item">
+          <div class="stat-card">
+            <span class="stat-icon">⏰</span>
             <span class="stat-label">今日工作</span>
             <span class="stat-value">0 分钟</span>
           </div>
-          <div class="stat-item">
+          <div class="stat-card">
+            <span class="stat-icon">🔥</span>
             <span class="stat-label">本次会话</span>
             <span class="stat-value">0 个</span>
           </div>
         </div>
+        <div class="stats-tip">
+          💡 每完成4个番茄钟后，建议进行长休息
+        </div>
       </div>
 
-      <!-- 提示信息 -->
-      <div class="tips">
-        <p>💡 提示: 每完成4个番茄钟后，建议进行长休息</p>
+      <!-- 模式标签页 -->
+      <div class="tab-panel" data-panel="modes">
+        <div class="modes-grid">
+          <button id="pomodoroBtn" class="mode-card active">
+            <span class="mode-icon">🍅</span>
+            <span class="mode-text">番茄钟</span>
+            <span class="mode-time">25分钟</span>
+          </button>
+          <button id="shortBreakBtn" class="mode-card">
+            <span class="mode-icon">☕</span>
+            <span class="mode-text">短休息</span>
+            <span class="mode-time">5分钟</span>
+          </button>
+          <button id="longBreakBtn" class="mode-card">
+            <span class="mode-icon">🌟</span>
+            <span class="mode-text">长休息</span>
+            <span class="mode-time">15分钟</span>
+          </button>
+        </div>
+
+        <div class="custom-section">
+          <div class="custom-label">⏱️ 自定义倒计时</div>
+          <div class="custom-input-group">
+            <input type="number" id="customMinutes" class="custom-input" placeholder="输入分钟数 (1-120)" min="1"
+              max="120" />
+            <button id="customBtn" class="btn btn-primary">设置</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
