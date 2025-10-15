@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🍅 番茄钟计时器</title>
+</head>
+
+<body class="w-full h-screen select-none overflow-hidden">
+  <div id="app" class="w-full h-full bg-gradient-to-br from-orange-50 to-red-50">
+    <div class="container">
+      <!-- 头部 -->
+      <div class="header">
+        <h1 class="title">🍅 番茄钟计时器</h1>
+        <p class="subtitle">专注工作，提升效率</p>
+      </div>
+
+      <!-- 主计时器区域 -->
+      <div class="timer-section">
+        <div class="mode-title" id="modeTitle">🍅 专注工作</div>
+        <div class="time-display" id="timeDisplay">25:00</div>
+
+        <!-- 控制按钮 -->
+        <div class="controls">
+          <button id="startBtn" class="btn btn-primary">
+            <span class="btn-icon">▶️</span>
+            <span>开始</span>
+          </button>
+          <button id="pauseBtn" class="btn btn-secondary" disabled>
+            <span class="btn-icon">⏸️</span>
+            <span>暂停</span>
+          </button>
+          <button id="resetBtn" class="btn btn-secondary">
+            <span class="btn-icon">🔄</span>
+            <span>重置</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 模式切换 -->
+      <div class="modes">
+        <button id="pomodoroBtn" class="mode-btn active">
+          <span class="mode-icon">🍅</span>
+          <span class="mode-text">番茄钟</span>
+          <span class="mode-time">25分钟</span>
+        </button>
+        <button id="shortBreakBtn" class="mode-btn">
+          <span class="mode-icon">☕</span>
+          <span class="mode-text">短休息</span>
+          <span class="mode-time">5分钟</span>
+        </button>
+        <button id="longBreakBtn" class="mode-btn">
+          <span class="mode-icon">🌟</span>
+          <span class="mode-text">长休息</span>
+          <span class="mode-time">15分钟</span>
+        </button>
+      </div>
+
+      <!-- 自定义时间 -->
+      <div class="custom-timer">
+        <div class="custom-label">⏱️ 自定义倒计时</div>
+        <div class="custom-input-group">
+          <input type="number" id="customMinutes" class="custom-input" placeholder="输入分钟数" min="1" max="120" />
+          <button id="customBtn" class="btn btn-outline">设置</button>
+        </div>
+      </div>
+
+      <!-- 统计信息 -->
+      <div class="statistics-section">
+        <div class="section-title">📊 今日统计</div>
+        <div id="statistics" class="statistics">
+          <div class="stat-item">
+            <span class="stat-label">今日完成</span>
+            <span class="stat-value">0 个</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">今日工作</span>
+            <span class="stat-value">0 分钟</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">本次会话</span>
+            <span class="stat-value">0 个</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 提示信息 -->
+      <div class="tips">
+        <p>💡 提示: 每完成4个番茄钟后，建议进行长休息</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TypeScript 入口文件 -->
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

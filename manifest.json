@@ -1,0 +1,34 @@
+{
+  "$schema": "./schema.json",
+  "id": "pomodoro-timer",
+  "name": "番茄钟计时器",
+  "version": "1.0.0",
+  "author": "Naimo Tools",
+  "icon": "./ico.png",
+  "description": "专注工作，提升效率的番茄钟与倒计时工具",
+  "category": "efficient_office",
+  "enabled": true,
+  "main": "./index.html",
+  "preload": "./preload.js",
+  "feature": [
+    {
+      "path": "pomodoro",
+      "name": "番茄钟",
+      "icon": "./ico.png",
+      "description": "开始25分钟专注工作时间",
+      "type": "text",
+      "weight": 100,
+      "lifecycleType": "reuse",
+      "singleton": true,
+      "anonymousSearchFields": [
+        "番茄钟",
+        "pomodoro",
+        "专注",
+        "计时",
+        "倒计时",
+        "timer",
+        "fqz"
+      ]
+    }
+  ]
+}
